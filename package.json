@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.8.8"
+  },
+  "dependencies": {
+    "bootstrap-sass": "^3.0.0",
+    "ioredis": "^4.17.3",
+    "laravel-echo": "^1.8.0",
+    "laravel-elixir": "^4.0.0",
+    "socket.io": "^2.3.0"
+  }
+}
