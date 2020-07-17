@@ -52,7 +52,7 @@
     var sendMessageLaddaButton = null;
 
     $(function() {
-        var socket = io('http://13.229.95.23:3000');
+        var socket = io('http://localhost:3000');
         socket.on('message-channel:App\\Events\\MessageSent', function(data){
             console.log(data);
             toAdd = {
@@ -150,7 +150,7 @@
                     "message": message,
                     "user": data.user
                 };
-                addMessageToDiv(toAdd)
+                //addMessageToDiv(toAdd)
                 $("#btn-input").val("").trigger("input");
             },
             error: function (jqXHR, exception) {
