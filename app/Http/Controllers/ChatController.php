@@ -38,6 +38,8 @@ class ChatController extends Controller
     		$new_user_chat_act->user_id = $user->id;
     		$new_user_chat_act->active = 1;
     		$new_user_chat_act->save();
+            
+            event(new JoinedChannel($user, $room_id));
     	}
 
     	$active_user_ids = UserChatActivity::where('chat_id', $room_id)
