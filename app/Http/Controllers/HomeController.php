@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\SocketTesterEvent;
 use App\Events\MessageSent;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -28,9 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //event(new SocketTesterEvent('Test'));
-        $messages = $this->fetchMessages();
-        return view('chat', ['messages'=>$messages]);
+        //$user = Auth::user();
+        //return view('chat', ['user'=>$user]);
+        return view('home');
     }
 
     public function fetchMessages()

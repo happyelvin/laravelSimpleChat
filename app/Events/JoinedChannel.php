@@ -1,27 +1,28 @@
 <?php
+
 namespace App\Events;
 
-use App\Message;
+use App\User;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class MessageSent implements ShouldBroadcast
+class JoinedChannel implements ShouldBroadcast
 {
     use SerializesModels;
-    public $message;
-    public $sender;
+    public $user;
     private $chat_id;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Message $message)
+    public function __construct(User $user, $chat_id)
     {
-        $this->message = $message;
-        $this->sender = $message->user->name;
-        $this->chat_id = $message->chat_id;
+        $this->user = $user;
+        $this->chat_id = $chat_id;
     }
+
     /**
      * Get the channels the event should be broadcast on.
      *

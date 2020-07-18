@@ -16,6 +16,8 @@ Route::group(['middleware' => ['web']], function () {
 	    return view('welcome');
 	});
 
+	Route::get('/contact', 'ContactController@index');
+
 	/*
 	|--------------------------------------------------------------------------
 	| Application Routes
@@ -29,11 +31,27 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::auth();
 
-	Route::get('/chat', 'HomeController@index');
+	Route::get('/chatrooms', 'ChatRoomController@index');
 
-	Route::get('messages', 'HomeController@fetchMessages')->name('fetchChatMessages');
+	/*Route::get('/chat', function(){
+		return view('chat');
+	});*/
 
-	Route::post('messages', 'HomeController@sendMessage')->name('sendChatMessage');
+	Route::get('/chat/{id}', 'ChatController@index');
+
+	Route::get('/messages', 'ChatController@fetchMessages')->name('fetchChatMessages');
+
+	Route::post('/messages', 'ChatController@sendMessage')->name('sendChatMessage');
+
+	Route::get('/test', function(){
+		return view('test');
+	});
+
+	Route::post('/leaveChatRoom', 'ChatController@leaveChatRoom')->name('leaveChatRoom');
+
+	Route::post('/informExistence', 'ChatController@informExistence')->name('informExistence');
+
+	Route::post('/sendTypingEvent', 'ChatController@sendTypingEvent')->name('sendTypingEvent');
 
 });
 

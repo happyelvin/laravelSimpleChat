@@ -3,6 +3,7 @@ var io = require('socket.io')(server);
 var Redis = require('ioredis');
 var redis = new Redis();
 
+
 //redis.subscribe('test-channel');
 redis.psubscribe('*');
 

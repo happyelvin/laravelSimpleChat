@@ -1,23 +1,28 @@
 <?php
+
 namespace App\Events;
 
 use App\User;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class SocketTesterEvent implements ShouldBroadcast
+class LeftChannel implements ShouldBroadcast
 {
     use SerializesModels;
-    public $username;
+    public $user;
+    private $chat_id;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($username)
+    public function __construct(User $user, $chat_id)
     {
-        $this->username = $username;
+        $this->user = $user;
+        $this->chat_id = $chat_id;
     }
+
     /**
      * Get the channels the event should be broadcast on.
      *
@@ -25,6 +30,7 @@ class SocketTesterEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['test-channel'];
+        $channel = "chat-channel.".$this->chat_id;
+        return [$channel];
     }
 }
