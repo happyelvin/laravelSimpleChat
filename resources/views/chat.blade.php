@@ -106,8 +106,9 @@
 
     $(function() {
         var chat_id = $("#chat_id").val();
-        var sever_url = $("#server_url").val();
-        var socket = io("http://localhost:3000");
+        //var sever_url = $("#server_url").val();
+	var server_url = "{{$server_url}}";
+        var socket = io(server_url+":3000");
         socket.on('chat-channel.'+chat_id+':App\\Events\\MessageSent', function(data){
             console.log(data);
             toAdd = {
