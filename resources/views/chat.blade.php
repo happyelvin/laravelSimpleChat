@@ -352,14 +352,13 @@
     function leaveChatRoom()
     {
         var _token = $('input[name="_token"]').val();
-        $.ajax({
+        /*$.ajax({
             type: "POST",
             url: "{{route('leaveChatRoom')}}",
             data: {
                 chat_id: "{{$chat->id}}",
                 _token:_token
             },
-            async: false,
             beforeSend: function(){
                 //
             },
@@ -372,7 +371,11 @@
             error: function (jqXHR, exception) {
                 //
             }
-        });
+        });*/
+	var fdata = new FormData();
+	fdata.append('chat_id', {{$chat->id}});
+	fdata.append('_token', _token);
+	navigator.sendBeacon("{{route('leaveChatRoom')}}", fdata);
     }
 
     var selfTypingTimer = false;
