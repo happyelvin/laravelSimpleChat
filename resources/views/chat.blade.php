@@ -164,7 +164,10 @@
     the others tabs inform server of the existence*/
     function informExistence()
     {
-        console.log("Informing Existence...");
+        if (document.visibilityState !== 'visible') {
+           return;
+        }
+        
         var _token = $('input[name="_token"]').val();
         $.ajax({
             type: "POST",
