@@ -135,4 +135,20 @@ class ChatController extends Controller
 
         event(new Typing($user, $chat_id));
     }
+
+    public function toggleVisibility(Request $request)
+    {
+        $user = Auth::user();
+        $chat_id = $request->chat_id;
+
+        $userchatact = UserChatActivity::where('chat_id', $chat_id)->where('user_id', $user->id)->firstOrFail();
+        if ($userchatact->active) {
+            $userchatact->active = 0;
+            event(new LeftChannel($user, $chat_id));
+        }
+        else {
+            $userchatact->active = 1;
+            event(new JoinedChannel($user, $chat_id));
+        }
+    }
 }

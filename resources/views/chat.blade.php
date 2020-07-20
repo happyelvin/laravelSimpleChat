@@ -6,6 +6,14 @@
         e.preventDefault()
         leaveChatRoom();
     });
+
+    document.addEventListener("visibilitychange", function() {
+        if (document.visibilityState === 'visible') {
+            informExistence();
+        } else {
+            leaveChatRoom();
+        }
+    });
 </script>
 
 <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
@@ -372,10 +380,23 @@
                 //
             }
         });*/
-	var fdata = new FormData();
-	fdata.append('chat_id', {{$chat->id}});
-	fdata.append('_token', _token);
-	navigator.sendBeacon("{{route('leaveChatRoom')}}", fdata);
+	   var fdata = new FormData();
+	   fdata.append('chat_id', "{{$chat->id}}");
+	   fdata.append('_token', _token);
+	   navigator.sendBeacon("{{route('leaveChatRoom')}}", fdata);
+    }
+
+    function toggleVisibility()
+    {
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            type: "POST",
+            url: "{{route('toggleVisibility')}}",
+            data: {
+                chat_id: "{{$chat->id}}",
+                _token:_token
+            }
+        });
     }
 
     var selfTypingTimer = false;

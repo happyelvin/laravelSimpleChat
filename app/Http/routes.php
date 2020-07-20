@@ -53,5 +53,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::post('/sendTypingEvent', 'ChatController@sendTypingEvent')->name('sendTypingEvent');
 
+	Route::post('/toggleVisibility', 'ChatController@toggleVisibility')->name('toggleVisibility');
+
 });
 
