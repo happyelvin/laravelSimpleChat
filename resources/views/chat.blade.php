@@ -359,6 +359,7 @@
                 chat_id: "{{$chat->id}}",
                 _token:_token
             },
+            async: false,
             beforeSend: function(){
                 //
             },
