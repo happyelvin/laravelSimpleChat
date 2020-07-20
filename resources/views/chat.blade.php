@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<script type="text/javascript">
+    window.addEventListener("beforeunload", function(e){
+        e.preventDefault()
+        leaveChatRoom();
+    });
+</script>
+
 <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
 <input type="hidden" name="server_url" id="server_url" value="{{$server_url}}">
 <input type="hidden" name="chat_id" id="chat_id" value="{{$chat->id}}">
@@ -410,11 +417,6 @@
         if(e.which == 13) {
             sendMessage();
         }
-    });
-
-    window.addEventListener("beforeunload", function(e){
-        e.preventDefault()
-        leaveChatRoom();
     });
 
     $(document).on("keydown", "#btn-input", function(e){
